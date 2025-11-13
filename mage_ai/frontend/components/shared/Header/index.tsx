@@ -516,46 +516,6 @@ function Header({
               />
             </Spacing>
 
-            <Spacing ml={1}>
-              <KeyboardShortcutButton
-                beforeElement={<Slack />}
-                compact
-                highlightOnHoverAlt
-                inline
-                linkProps={{
-                  as: 'https://www.mage.ai/chat',
-                  href: 'https://www.mage.ai/chat',
-                }}
-                noBackground
-                noHoverUnderline
-                openNewTab
-                sameColorAsText
-                uuid="Header/live_chat"
-              >
-                Live help
-              </KeyboardShortcutButton>
-            </Spacing>
-
-            <Spacing ml={1}>
-              <KeyboardShortcutButton
-                compact
-                highlightOnHoverAlt
-                inline
-                linkProps={{
-                  as: 'https://cloud.mage.ai/sign-up?ref=oss',
-                  href: 'https://cloud.mage.ai/sign-up?ref=oss',
-                }}
-                openNewTab
-                noBackground
-                noHoverUnderline
-                sameColorAsText
-                afterElement={<MageProLetters size={24} />}
-                uuid="Header/pro"
-              >
-                Try
-              </KeyboardShortcutButton>
-            </Spacing>
-
             {menuItems &&
               <>
                 <Spacing ml={2} />

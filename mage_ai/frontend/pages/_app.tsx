@@ -26,6 +26,7 @@ import useStatus from '@utils/models/status/useStatus';
 import { CustomEventUUID } from '@utils/events/constants';
 import { DEMO_GA_MEASUREMENT_ID } from '@utils/gtag';
 import { ErrorProvider } from '@context/Error';
+import { LanguageProvider } from '@context/Language';
 import { LOCAL_STORAGE_KEY_HIDE_PUBLIC_DEMO_WARNING } from '@storage/constants';
 import { ModalProvider } from '@context/Modal';
 import { RED } from '@oracle/styles/colors/main';
@@ -290,7 +291,8 @@ function MyApp(props: AppProps<AppInternalProps>) {
 
   return (
     <>
-      <KeyboardContext.Provider value={keyboardContextValue}>
+      <LanguageProvider>
+        <KeyboardContext.Provider value={keyboardContextValue}>
         <ThemeProvider theme={Object.assign(stylesTheme, themeProps?.currentTheme || currentTheme)}>
           <GridThemeProvider gridTheme={gridThemeDefault}>
             <ModalProvider>
@@ -329,7 +331,8 @@ function MyApp(props: AppProps<AppInternalProps>) {
           </GridThemeProvider>
           <ToastWrapper />
         </ThemeProvider>
-      </KeyboardContext.Provider>
+        </KeyboardContext.Provider>
+      </LanguageProvider>
 
       {isDemoApp && <GoogleAnalytics gaId={DEMO_GA_MEASUREMENT_ID} />}
     </>

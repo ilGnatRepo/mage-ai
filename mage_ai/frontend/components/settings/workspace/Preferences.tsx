@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useMutation } from 'react-query';
 
 import Button from '@oracle/elements/Button';
@@ -28,6 +29,7 @@ import { capitalizeRemoveUnderscoreLower } from '@utils/string';
 import { ignoreKeys } from '@utils/hash';
 import { onSuccess } from '@api/utils/response';
 import { useError } from '@context/Error';
+import LanguageSwitch from '@components/shared/LanguageSwitch';
 
 type PreferencesProps = {
   cancelButtonText?: string;
@@ -360,6 +362,14 @@ function Preferences({
                 value={projectAttributes?.openai_api_key || ''}
               />
           }
+        </Spacing>
+      </Panel>
+
+      <Spacing mt={UNITS_BETWEEN_SECTIONS} />
+
+      <Panel noPadding>
+        <Spacing p={PADDING_UNITS}>
+          <LanguageSwitch />
         </Spacing>
       </Panel>
 
