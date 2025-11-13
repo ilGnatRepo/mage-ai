@@ -46,11 +46,11 @@ RUN \
   pip3 install --no-cache-dir "git+https://github.com/mage-ai/sqlglot#egg=sqlglot" && \
   # faster-fifo is not supported on Windows: https://github.com/alex-petrenko/faster-fifo/issues/17
   pip3 install --no-cache-dir faster-fifo && \
-  pip3 install --no-cache-dir "git+git@github.com:ilGnatRepo/mage-ai.git@master#egg=mage-integrations&subdirectory=mage_integrations"; 
+  pip3 install --no-cache-dir "git+https://github.com/ilGnatRepo/mage-ai.git@master#egg=mage-integrations&subdirectory=mage_integrations"; 
 
 # Mage
 COPY ./mage_ai/server/constants.py /tmp/constants.py
-RUN pip3 install --no-cache-dir "git+git@github.com:ilGnatRepo/mage-ai.git@master#egg=mage-ai[all]"; 
+RUN pip3 install --no-cache-dir "git+https://github.com/ilGnatRepo/mage-ai.git@master#egg=mage-ai[all]"; 
 
 
 ## Startup Script
