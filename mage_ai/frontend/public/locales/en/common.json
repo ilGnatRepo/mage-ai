@@ -1,0 +1,45 @@
+{
+  "settings": {
+    "title": "Settings",
+    "preferences": {
+      "title": "Preferences",
+      "projectName": "Project name",
+      "projectUUID": "Project UUID",
+      "notRequired": "Not required",
+      "helpImproveMage": "Help improve Mage",
+      "helpImproveMageDescription": "Please contribute usage statistics to help improve the developer experience for you and everyone in the community. Learn more",
+      "here": "here"
+    },
+    "pipeline": {
+      "title": "Pipeline settings",
+      "description": "Global settings that are applied to all pipelines in this project.",
+      "saveTriggersInCode": "Save triggers in code automatically",
+      "saveTriggersInCodeDescription": "Every time a trigger is created or updated in this pipeline, automatically persist it in code."
+    },
+    "features": {
+      "title": "Features",
+      "docs": "(docs)",
+      "overrideFromRootProject": "Override from root project"
+    },
+    "openAI": {
+      "title": "OpenAI",
+      "apiKey": "API key",
+      "edit": "Edit",
+      "addAPIKey": "Add API key"
+    },
+    "language": {
+      "title": "Language",
+      "description": "Select your preferred language for the interface."
+    }
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "enable": "Enable",
+    "disable": "Disable",
+    "on": "On",
+    "off": "Off",
+    "english": "English",
+    "chinese": "中文"
+  }
+}

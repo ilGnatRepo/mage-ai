@@ -2,8 +2,10 @@ const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
 const removeImports = require('next-remove-imports')();
+const { i18n } = require('./next-i18next.config');
 
 module.exports = removeImports({
+  i18n,
   eslint: {
     ignoreDuringBuilds: true,
   },

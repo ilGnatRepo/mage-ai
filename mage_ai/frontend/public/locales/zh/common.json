@@ -1,0 +1,45 @@
+{
+  "settings": {
+    "title": "设置",
+    "preferences": {
+      "title": "首选项",
+      "projectName": "项目名称",
+      "projectUUID": "项目UUID",
+      "notRequired": "非必需",
+      "helpImproveMage": "帮助改进Mage",
+      "helpImproveMageDescription": "请贡献使用统计数据，以帮助改善您和整个社区的开发者体验。了解更多",
+      "here": "这里"
+    },
+    "pipeline": {
+      "title": "流水线设置",
+      "description": "应用于此项目中所有流水线的全局设置。",
+      "saveTriggersInCode": "自动在代码中保存触发器",
+      "saveTriggersInCodeDescription": "每次在此流水线中创建或更新触发器时，自动将其持久化到代码中。"
+    },
+    "features": {
+      "title": "功能",
+      "docs": "(文档)",
+      "overrideFromRootProject": "覆盖根项目设置"
+    },
+    "openAI": {
+      "title": "OpenAI",
+      "apiKey": "API密钥",
+      "edit": "编辑",
+      "addAPIKey": "添加API密钥"
+    },
+    "language": {
+      "title": "语言",
+      "description": "选择界面的首选语言。"
+    }
+  },
+  "common": {
+    "save": "保存",
+    "cancel": "取消",
+    "enable": "启用",
+    "disable": "禁用",
+    "on": "开启",
+    "off": "关闭",
+    "english": "English",
+    "chinese": "中文"
+  }
+}

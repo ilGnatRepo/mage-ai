@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import App, { AppProps } from 'next/app';
+import { appWithTranslation } from 'next-i18next';
 import Cookies from 'js-cookie';
 import LoadingBar from 'react-top-loading-bar';
 import dynamic from 'next/dynamic';
@@ -51,6 +52,7 @@ const COMMAND_CENTER_ROOT_ID = 'command-center-root';
 const Banner = dynamic(() => import('@oracle/components/Banner'), { ssr: false });
 
 type AppInternalProps = {
+  currentTheme: ThemeType;
   defaultTitle?: string;
   themeProps?: {
     currentTheme?: any;
@@ -58,23 +60,18 @@ type AppInternalProps = {
   themeSettings?: Record<string, any>;
   title?: string;
   version?: string;
-};
-
-type MyAppProps = {
-  currentTheme: ThemeType;
-  pageProps: AppInternalProps;
-  router: any;
+} & {
   version?: string;
 };
 
-function MyApp(props: MyAppProps & AppProps) {
+function MyApp(props: AppProps<AppInternalProps>) {
   const commandCenterRootRef = useRef(null);
   const refLoadingBar = useRef(null);
   const keyMapping = useRef({});
   const keyHistory = useRef([]);
 
-  const { Component, currentTheme, pageProps, router } = props;
-  const { defaultTitle, themeProps = {}, title } = pageProps;
+  const { Component, pageProps, router } = props;
+  const { currentTheme, defaultTitle, themeProps = {}, title } = pageProps;
 
   const { featureEnabled, featureUUIDs } = useProject();
   const commandCenterEnabled = useMemo(
@@ -273,7 +270,7 @@ function MyApp(props: MyAppProps & AppProps) {
           defaultTitle,
           themeSettings: pageProps?.themeSettings,
           title,
-          version: (props?.version || props?.pageProps?.version) as any,
+          version: pageProps?.version as any,
         }}
         router={router}
       />
@@ -283,8 +280,8 @@ function MyApp(props: MyAppProps & AppProps) {
   );
 
   const useV2 = useMemo(
-    () => props?.version === 'v2' || props?.pageProps?.version === 'v2',
-    [props?.version, props?.pageProps?.version],
+    () => props?.pageProps?.version === 'v2',
+    [props?.pageProps?.version],
   );
 
   if (useV2) {
@@ -349,4 +346,6 @@ MyApp.getInitialProps = async appContext => {
   };
 };
 
-export default MyApp;
+const MyAppWithTranslation = appWithTranslation(MyApp as any);
+
+export default MyAppWithTranslation;

@@ -62,6 +62,13 @@ docker run -d \
   mage/data:production-chinese \
   /app/run_app.sh
 
+docker run -it \
+  -p 6789:6789 \
+  -v $(pwd):/home/src \
+  mage/data:v0 \
+  /app/run_app.sh mage \
+  start mageai
+
 # 6. 访问 http://localhost:6789
 # 在右上角看到语言选择器
 
@@ -155,11 +162,10 @@ yarn export_prod
 
 # 重新构建 Docker 镜像
 cd ..
-docker build -f Dockerfile -t mage/data:production-chinese .
+docker build -f Dockerfile -t mage/data:v0 .
 
-# 重启容器
-docker stop <container_id>
-docker run -d -p 6789:6789 mage/data:production-chinese
+# 启动容器
+docker run -it -p 6789:6789 -v $(pwd):/home/src mage/data:v0 /app/run_app.sh mage start mageai
 ```
 
 ### 问题2：切换语言后部分内容仍是英文
