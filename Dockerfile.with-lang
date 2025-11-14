@@ -1,18 +1,4 @@
-## Stage 1: Build frontend
-FROM node:18-alpine AS frontend-builder
-WORKDIR /app/mage_ai/frontend
-
-# Copy frontend files
-COPY ./mage_ai/frontend/package.json ./mage_ai/frontend/yarn.lock ./
-COPY ./mage_ai/frontend .
-
-# Install dependencies and build
-RUN yarn install --frozen-lockfile --network-timeout 1000000
-ENV NODE_OPTIONS="--max-old-space-size=4096"
-RUN yarn build
-
-
-## Stage 2: Build backend
+## Build backend
 FROM python:3.10-bookworm
 LABEL description="Deploy Mage with i18n support"
 ARG FEATURE_BRANCH
@@ -73,24 +59,28 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs && \
     npm install -g yarn
 
+# ## Startup Script
+# COPY --chmod=0755 ./scripts/install_other_dependencies.py ./scripts/run_app.sh /app/
+
+# ENV MAGE_DATA_DIR="/home/src/mage_data"
+# ENV PYTHONPATH="${PYTHONPATH:-}:/home/src"
+# WORKDIR /home/src
+# EXPOSE 6789
+# EXPOSE 7789
+# EXPOSE 3000
+
+# CMD ["/bin/bash", "-c", "\
+# mage start default_repo --project-type standalone & \
+# cd $(python3 -c 'import mage_ai,os,inspect; print(os.path.dirname(inspect.getfile(mage_ai)))')/frontend && \
+# exec npm run start"]
+
 ## Startup Script
 COPY --chmod=0755 ./scripts/install_other_dependencies.py ./scripts/run_app.sh /app/
 
-# Copy built frontend from stage 1
-COPY --from=frontend-builder /app/mage_ai/frontend/.next /home/src/mage_ai/frontend/.next
-COPY --from=frontend-builder /app/mage_ai/frontend/public /home/src/mage_ai/frontend/public
-COPY --from=frontend-builder /app/mage_ai/frontend/package.json /home/src/mage_ai/frontend/
-COPY --from=frontend-builder /app/mage_ai/frontend/node_modules /home/src/mage_ai/frontend/node_modules
-
-# Copy backend and other files
-RUN cp -rf /home/src/mage_ai/frontend/. \
-           $(python3 -c "import mage_ai,os,inspect; print(os.path.dirname(inspect.getfile(mage_ai)))")/frontend/
-
 ENV MAGE_DATA_DIR="/home/src/mage_data"
-ENV PYTHONPATH="${PYTHONPATH:-}:/home/src"
+ENV PYTHONPATH="${PYTHONPATH}:/home/src"
 WORKDIR /home/src
 EXPOSE 6789
 EXPOSE 7789
-EXPOSE 3000
 
 CMD ["/bin/sh", "-c", "/app/run_app.sh"]
