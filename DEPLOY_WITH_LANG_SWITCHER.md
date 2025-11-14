@@ -40,32 +40,20 @@ cd /home/ilgnat/workFile/project/mage-ai
 
 # 2. 构建前端静态文件（这会包含语言切换器）
 cd mage_ai/frontend
-npm install
-npm run export_prod
+yarn install --frozen-lockfile --network-timeout 1000000
+yarn build
 
 # 3. 返回项目根目录
 cd /home/ilgnat/workFile/project/mage-ai
 
 # 4. 构建 Docker 镜像
-docker build -f Dockerfile -t mage/data:production-chinese .
+docker build -f Dockerfile.with-lang.v1.0 -t mage/data:v0.2 .
 
 # 5. 运行容器
-docker run -d \
-  -p 6789:6789 \
-  -v $(pwd):/home/src \
-  -v ~/.aws:/root/.aws \
-  -v ~/.mage_data:/root/.mage_data \
-  -e ENV=dev \
-  -e HOST=0.0.0.0 \
-  -e PORT=6789 \
-  -e PROJECT=default_repo \
-  mage/data:production-chinese \
-  /app/run_app.sh
-
 docker run -it \
   -p 6789:6789 \
   -v $(pwd):/home/src \
-  mage/data:v0 \
+  mage/data:v0.2 \
   /app/run_app.sh mage \
   start mageai
 

@@ -34,10 +34,10 @@ const LanguageSwitch: React.FC<LanguageSwitchProps> = ({ compact = false }) => {
         value={currentLanguage}
       >
         <option value="en">
-          {i18n.t('common.english', 'English')}
+          {i18n.t('common.english', 'English') as string}
         </option>
         <option value="zh">
-          {i18n.t('common.chinese', '中文')}
+          {i18n.t('common.chinese', '中文') as string}
         </option>
       </Select>
       {!compact && (
